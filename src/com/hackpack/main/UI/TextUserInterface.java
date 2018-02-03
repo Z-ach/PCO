@@ -23,6 +23,7 @@ public class TextUserInterface implements Interface{
 		System.out.println("A list of files will then be returned to you");
 		System.out.println("These files have not been modified after your specified date.");
 		String date = input.nextLine();
+		date += " 00:00:00";
 		Date parsedDate = null;
 		try {
 			parsedDate = sdf.parse(date);
