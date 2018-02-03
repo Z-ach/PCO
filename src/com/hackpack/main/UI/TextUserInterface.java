@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import com.hackpack.main.Engine.Engine.MyFile;
 
-public class TextUserInterface implements Interface{
+public class TextUserInterface implements UI{
 	
 	Scanner input;
 	SimpleDateFormat sdf;

@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 import com.hackpack.main.Engine.Engine.MyFile;
 
-public class GUI extends JFrame implements ActionListener, Interface{
+public class GUI extends JFrame implements ActionListener, UI{
 	
 	JTextField startDate, prompt1, prompt2, prompt3;
 	JButton enter;

@@ -2,12 +2,12 @@ package com.hackpack.main;
 
 import java.io.File;
 
-import com.hackpack.main.UI.Interface;
+import com.hackpack.main.UI.UI;
 import com.hackpack.main.UI.TextUserInterface;
 
 public class Main {
 	
-	static Interface inter = new TextUserInterface();
+	static UI inter = new TextUserInterface();
 	
 	public static void main(String[] args){
 		File[] files = new File("/Users/Zach/Desktop/HackPoly/HackPoly/src").listFiles();
