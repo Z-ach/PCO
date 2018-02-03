@@ -38,9 +38,9 @@ public class TextUserInterface implements UI{
 
 	@Override
 	public void printList(ArrayList<MyFile> files) {
-		System.out.println("Filename/Path:\t\t\tSize:\t\tLast Modified:");
+		System.out.println("Path:\t\t\t\t\t\t\t\t\t\t\t\t\tSize:\t\t\tLast Modified:");
 		for(MyFile file : files){
-			System.out.println(file.getPath() + "\t" + file.getTotalSpace() + "\t" + sdf.format(file.getTimeStamp()));
+			System.out.println(file.getPath() + "\t\t\t\t\t" + file.getTotalSpace() + "\t\t" + sdf.format(file.getTimeStamp()));
 		}
 	}
 

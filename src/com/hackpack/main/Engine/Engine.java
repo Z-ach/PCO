@@ -42,7 +42,7 @@ public class Engine {
 		private MyFile(File file) {
 			this.path = file.getAbsolutePath();
 			this.timeStamp = file.lastModified();
-			this.fileSize = file.getTotalSpace();
+			this.fileSize = file.length();
 		}
 		
 		public String getPath(){
