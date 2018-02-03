@@ -25,7 +25,7 @@ public class Engine {
 		}
 	}
 
-	public class MyFile{
+	public class MyFile implements Comparable<MyFile>{
 		private String path;
 		private long timeStamp, fileSize;
 
@@ -43,6 +43,11 @@ public class Engine {
 		}
 		public long getTotalSpace(){
 			return fileSize;
+		}
+
+		@Override
+		public int compareTo(MyFile file) {
+			return (int)(this.getTimeStamp() - file.getTimeStamp());
 		}
 	}
 }
