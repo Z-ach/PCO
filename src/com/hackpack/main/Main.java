@@ -1,29 +1,17 @@
 package com.hackpack.main;
 
-import java.io.File;
-
-import com.hackpack.main.UI.UI;
+import com.hackpack.main.Engine.Engine;
 import com.hackpack.main.UI.TextUserInterface;
+import com.hackpack.main.UI.UI;
 
 public class Main {
 	
 	static UI inter = new TextUserInterface();
 	
 	public static void main(String[] args){
-		File[] files = new File("/Users/Zach/Desktop/HackPoly/HackPoly/src").listFiles();
-		System.out.println(files.length);
-		showFiles(files);
+		
+		Engine engine = new Engine(inter);
+		engine.run();
+		
 	}
-	
-	public static void showFiles(File[] files) {
-	    for (File file : files) {
-	        if (file.isDirectory()) {
-	            System.out.println("Directory: " + file.getName());
-	            showFiles(file.listFiles());
-	        } else {
-	            System.out.println("File: " + file.getName());
-	        }
-	    }
-	}
-	
 }
