@@ -17,7 +17,7 @@ public class Engine {
 	}
 
 	public void run(){
-		File[] files = new File("/Applications").listFiles();
+		File[] files = new File(System.getProperty("user.home")).listFiles();
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList);
