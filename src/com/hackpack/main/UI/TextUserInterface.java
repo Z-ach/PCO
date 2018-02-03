@@ -1,11 +1,12 @@
 package com.hackpack.main.UI;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+
+import com.hackpack.main.Engine.Engine.MyFile;
 
 public class TextUserInterface implements Interface{
 	
@@ -36,10 +37,10 @@ public class TextUserInterface implements Interface{
 	}
 
 	@Override
-	public void printList(ArrayList<File> files) {
+	public void printList(ArrayList<MyFile> files) {
 		System.out.println("Filename/Path:\t\t\tSize:\t\tLast Modified:");
-		for(File file : files){
-			System.out.println(file.getAbsolutePath() + "\t" + file.getTotalSpace() + "\t" + sdf.format(file.lastModified()));
+		for(MyFile file : files){
+			System.out.println(file.getPath() + "\t" + file.getTotalSpace() + "\t" + sdf.format(file.getTimeStamp()));
 		}
 	}
 

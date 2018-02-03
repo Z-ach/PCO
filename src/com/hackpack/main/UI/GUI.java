@@ -2,7 +2,6 @@ package com.hackpack.main.UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import java.util.concurrent.CountDownLatch;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import com.hackpack.main.Engine.Engine.MyFile;
 
 public class GUI extends JFrame implements ActionListener, Interface{
 	
@@ -56,7 +57,7 @@ public class GUI extends JFrame implements ActionListener, Interface{
 	}
 
 	@Override
-	public void printList(ArrayList<File> files) {
+	public void printList(ArrayList<MyFile> files) {
 		// TODO Auto-generated method stub
 		
 	}
