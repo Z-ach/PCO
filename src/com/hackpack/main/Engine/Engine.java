@@ -17,7 +17,7 @@ public class Engine {
 	}
 
 	public void run(){
-		File[] files = new File("/Users/Zach/Desktop/HackPoly/HackPoly/src").listFiles();
+		File[] files = new File("/Applications").listFiles();
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList);
@@ -57,7 +57,12 @@ public class Engine {
 
 		@Override
 		public int compareTo(MyFile file) {
-			return (int)(this.getTimeStamp() - file.getTimeStamp());
+			if(this.getTimeStamp() < file.getTimeStamp()){
+				return -1;
+			}else if(this.getTimeStamp() > file.getTimeStamp()){
+				return 1;
+			}
+			return 0;
 		}
 	}
 }
