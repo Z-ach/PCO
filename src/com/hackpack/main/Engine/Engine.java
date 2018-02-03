@@ -1,27 +1,31 @@
 package com.hackpack.main.Engine;
 
 import java.io.File;
-
+import java.util.ArrayList;
 public class Engine {
 
+	private ArrayList<MyFile> aList;
+	
 	public Engine() {
 		File[] files = new File("/Users/Zach/Desktop/HackPoly/HackPoly/src").listFiles();
 		System.out.println(files.length);
+		aList = new ArrayList<MyFile>();
 		showFiles(files);
 	}
 
-	public static void showFiles(File[] files) {
+	public void showFiles(File[] files) {
 		for (File file : files) {
 			if (file.isDirectory()) {
 				System.out.println("Directory: " + file.getName());
 				showFiles(file.listFiles());
 			} else {
 				System.out.println("File: " + file.getName());
+				aList.add(new MyFile(file));
 			}
 		}
 	}
 
-	protected class MyFile{
+	public class MyFile{
 		private String path;
 		private long timeStamp, fileSize;
 
