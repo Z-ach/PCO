@@ -1,7 +1,6 @@
 package com.hackpack.main.Engine;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,7 +19,10 @@ public class Engine {
 	}
 
 	public void run() {
-		File[] files = new File(System.getProperty("user.home")).listFiles();
+		File[] files = new File(System.getenv("USERPROFILE")).listFiles();
+		File f = new File(System.getenv("USERPROFILE"));
+		System.out.println(files[0].getAbsolutePath());
+		System.out.println(files[0].listFiles().length);
 		date = ui.requestDate();
 		showFiles(files);
 		Collections.sort(aList);
@@ -28,22 +30,30 @@ public class Engine {
 	}
 
 	public void showFiles(File[] files) {
-		for (File file : files) {
-			if (file.isDirectory() && !file.isHidden() && notApp(file)) {
-				showFiles(file.listFiles());
-			} else {
-				if (fileFilter(file) && file.lastModified() < date) {
-					if(maxLength < file.getAbsolutePath().length()){
-						maxLength = file.getAbsolutePath().length();
+		if (files != null) {
+			for (File file : files) {
+				if (file == null)
+					continue;
+				if (file.isDirectory() && !file.isHidden() && notApp(file) && notUnwanted(file)) {
+					showFiles(file.listFiles());
+				} else {
+					if (fileFilter(file) && file.lastModified() < date) {
+						if (maxLength < file.getAbsolutePath().length()) {
+							maxLength = file.getAbsolutePath().length();
+						}
+						aList.add(new MyFile(file));
 					}
-					aList.add(new MyFile(file));
 				}
 			}
 		}
 	}
-	
-	private boolean notApp(File file){
-		return !file.getAbsolutePath().contains(".app");
+
+	private boolean notUnwanted(File file) {
+		return !file.getAbsolutePath().contains(" ");
+	}
+
+	private boolean notApp(File file) {
+		return !file.getAbsolutePath().contains("\\.");
 	}
 
 	private boolean fileFilter(File file) {
