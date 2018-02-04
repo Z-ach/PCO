@@ -19,18 +19,24 @@ public class Engine {
 	}
 
 	public void run() {
-		File[] files = new File("C:\\").listFiles();
+		File[] files = getRoot().listFiles();
 		date = ui.requestDate();
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList, maxLength);
 	}
+	
+	private File getRoot(){
+		File temp = new File(System.getProperty("user.home"));
+		while(temp.getParent() != null)
+			temp = temp.getParentFile();
+		return temp;
+	}
 
 	public void showFiles(File[] files) {
 		if (files != null) {
 			for (File file : files) {
-				if (file == null)
-					continue;
+				//System.out.println(file.getAbsolutePath());
 				if (file.isDirectory() && !file.isHidden() && notApp(file) && notUnwanted(file)) {
 					showFiles(file.listFiles());
 				} else {
@@ -51,7 +57,7 @@ public class Engine {
 	}
 
 	private boolean notApp(File file) {
-		return !file.getAbsolutePath().contains("\\.");
+		return !file.getAbsolutePath().contains("\\.") && !file.getAbsolutePath().contains(".app");
 	}
 
 	private boolean fileFilter(File file) {
