@@ -70,4 +70,10 @@ public class GUI extends JFrame implements ActionListener, UI{
 		}
 	}
 
+	@Override
+	public String[] requestExt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
