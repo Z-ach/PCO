@@ -29,7 +29,7 @@ public class Engine {
 
 	public void showFiles(File[] files) {
 		for (File file : files) {
-			if (file.isDirectory() && !file.isHidden() && notApp(file)) {
+			if (file.isDirectory() && !file.isHidden() && notApp(file) && !steam(file)) {
 				showFiles(file.listFiles());
 			} else {
 				if (fileFilter(file) && file.lastModified() < date) {
@@ -47,13 +47,17 @@ public class Engine {
 	}
 
 	private boolean fileFilter(File file) {
-		String[] extensions = { ".html", ".png", ".jpg" };
+		String[] extensions = { ".html", ".png", ".jpg", ".doc", ".docx", ".pdf", ".xls", ".xlsx", ".ppt", "pptx", ".txt"};
 		for (String str : extensions) {
 			if (file.getAbsolutePath().contains(str)) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	private boolean steam(File file){
+		return file.getAbsolutePath().contains("/Steam/");
 	}
 
 	public class MyFile implements Comparable<MyFile> {
@@ -75,7 +79,7 @@ public class Engine {
 		}
 
 		public long getTotalSpace() {
-			return fileSize;
+			return fileSize/1024;
 		}
 
 		@Override

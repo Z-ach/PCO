@@ -42,7 +42,7 @@ public class TextUserInterface implements UI{
 		char fill = ' ';
 		String title = "Path:";
 		String titlePath = title + new String(new char[width - title.length()]).replace('\0', fill);
-		System.out.println(titlePath + "\tSize:\t\t\tLast Modified:");
+		System.out.println(titlePath + "\tSize (kb):\t\t\tLast Modified:");
 		for(MyFile file : files){
 			String path = file.getPath();
 			String fixed = path + new String(new char[width - path.length()]).replace('\0', fill);
