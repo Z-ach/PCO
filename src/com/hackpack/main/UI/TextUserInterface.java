@@ -71,8 +71,14 @@ public class TextUserInterface implements UI {
 
 	@Override
 	public String deletePrompt() {
-		// TODO Auto-generated method stub
-		return null;
+		String answer = "";
+		System.out.println("Would you like to delete this file? Type y/n/done");
+		answer = input.nextLine();
+		while(!answer.equals("y") || !answer.equals("n") || !answer.equals("done")){
+			System.out.println("Invalid entry. Please try again. Type y/n/done.");
+			answer = input.nextLine();
+		}
+		return answer;
 	}
 
 }
