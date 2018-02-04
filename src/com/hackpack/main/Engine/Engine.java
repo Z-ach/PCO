@@ -28,20 +28,20 @@ public class Engine {
 		ui.printList(aList, maxLength);
 		populateDeleteList();
 	}
-	
-	private File getRoot(){
+
+	private File getRoot() {
 		File temp = new File(System.getProperty("user.home"));
 		System.out.println(temp.getAbsolutePath());
-		while(temp.getParent() != null)
+		while (temp.getParent() != null)
 			temp = temp.getParentFile();
-		//return temp;
+		// return temp;
 		return new File("/Users/Zach/Desktop/HackPoly/HackPoly/testText");
 	}
 
 	public void showFiles(File[] files) {
 		if (files != null) {
 			for (File file : files) {
-				//System.out.println(file.getAbsolutePath());
+				// System.out.println(file.getAbsolutePath());
 				if (file.isDirectory() && !file.isHidden() && notApp(file) && notUnwanted(file)) {
 					showFiles(file.listFiles());
 				} else {
@@ -64,8 +64,8 @@ public class Engine {
 	private boolean notApp(File file) {
 		return !file.getAbsolutePath().contains("\\.") && !file.getAbsolutePath().contains(".app");
 	}
-	
-	private void createFileFilter(){
+
+	private void createFileFilter() {
 		extensions = ui.requestExt();
 	}
 
@@ -77,14 +77,14 @@ public class Engine {
 		}
 		return false;
 	}
-	
-	private void populateDeleteList(){
+
+	private void populateDeleteList() {
 		ArrayList<MyFile> deleteList = new ArrayList<MyFile>();
 		boolean finished = false;
-		for(MyFile file : aList){
-			if(finished)
+		for (MyFile file : aList) {
+			if (finished)
 				break;
-			switch(ui.deletePrompt()){
+			switch (ui.deletePrompt(file)) {
 			case "y":
 				deleteList.add(file);
 				break;
@@ -96,13 +96,16 @@ public class Engine {
 		}
 		confirmAndDelete(deleteList);
 	}
-	
-	private void confirmAndDelete(ArrayList<MyFile> dList){
-		if(dList.size() == 0)
+
+	private void confirmAndDelete(ArrayList<MyFile> dList) {
+		if (dList.size() == 0)
 			return;
 		ui.printList(dList, maxLength);
-		for(MyFile file : dList){
-			file.delete();
+		String confirmation = ui.comfirmDelete();
+		if (confirmation.equalsIgnoreCase("y")) {
+			for (MyFile file : dList) {
+				file.delete();
+			}
 		}
 	}
 
@@ -110,7 +113,7 @@ public class Engine {
 		private String path;
 		private long timeStamp, fileSize;
 		private File file;
-		
+
 		private MyFile(File file) {
 			this.path = file.getAbsolutePath();
 			this.timeStamp = file.lastModified();
@@ -127,10 +130,10 @@ public class Engine {
 		}
 
 		public long getTotalSpace() {
-			return fileSize/1024;
+			return fileSize / 1024;
 		}
-		
-		private void delete(){
+
+		private void delete() {
 			file.delete();
 		}
 

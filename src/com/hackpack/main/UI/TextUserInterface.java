@@ -82,9 +82,10 @@ public class TextUserInterface implements UI {
 	}
 
 	@Override
-	public String deletePrompt() {
+	public String deletePrompt(MyFile file) {
 		String answer = "";
 		System.out.println("Would you like to delete this file? Type y/n/done");
+		System.out.println(file.getPath());
 		answer = input.nextLine();
 		while(!answer.equals("y") && !answer.equals("n") && !answer.equals("done")){
 			System.out.println("Invalid entry. Please try again. Type y/n/done.");
@@ -99,8 +100,15 @@ public class TextUserInterface implements UI {
 	}
 
 	@Override
-	public void printFile(MyFile file) {
-		System.out.println(file.getPath());
+	public String comfirmDelete() {
+		String response = "";
+		System.out.println("Are you sure you want to delete the listed files? y/n:");
+		response = input.nextLine();
+		while(!response.toLowerCase().equals("y") && !response.toLowerCase().equals("n")){
+			System.out.println("Invalid response. Please try again.");
+			response = input.nextLine();
+		}
+		return response;
 	}
 
 }
