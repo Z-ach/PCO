@@ -20,7 +20,7 @@ public class Engine {
 	}
 
 	public void run() {
-		File[] files = getRoot().listFiles();
+		File[] files = getStart().listFiles();
 		date = ui.requestDate();
 		createFileFilter();
 		ui.running();
@@ -30,11 +30,13 @@ public class Engine {
 		populateDeleteList();
 	}
 
-	private File getRoot() {
+	private File getStart() {
+		String start = ui.starting();
 		File temp = new File(System.getProperty("user.home"));
-		System.out.println(temp.getAbsolutePath());
-		while (temp.getParent() != null)
-			temp = temp.getParentFile();
+		if (start.equalsIgnoreCase("root")) {
+			while (temp.getParent() != null)
+				temp = temp.getParentFile();
+		}
 		return temp;
 	}
 
