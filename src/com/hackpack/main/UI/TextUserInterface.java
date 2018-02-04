@@ -30,6 +30,10 @@ public class TextUserInterface implements UI {
 			System.out.println("Would you like to add more?");
 			opt = input.nextLine();
 		}
+		if(ext.size() == 0){
+			String[] extensions = { ".html", ".png", ".jpg", ".doc", ".docx", ".pdf", ".xls", ".xlsx", ".ppt", "pptx", ".txt"};
+			return extensions;
+		}
 		return (String[])ext.toArray();
 	}
 
@@ -63,6 +67,12 @@ public class TextUserInterface implements UI {
 			String fixed = path + new String(new char[width - path.length()]).replace('\0', fill);
 			System.out.println(fixed + "\t" + file.getTotalSpace() + "\t\t\t" + sdf.format(file.getTimeStamp()));
 		}
+	}
+
+	@Override
+	public String deletePrompt() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

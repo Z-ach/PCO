@@ -9,4 +9,5 @@ public interface UI {
 	public long requestDate();
 	public void printList(ArrayList<MyFile> files, int length);
 	public String[] requestExt();
+	public String deletePrompt();
 }
