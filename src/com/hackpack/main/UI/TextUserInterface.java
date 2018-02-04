@@ -42,11 +42,11 @@ public class TextUserInterface implements UI{
 		char fill = ' ';
 		String title = "Path:";
 		String titlePath = title + new String(new char[width - title.length()]).replace('\0', fill);
-		System.out.println(titlePath + "\tSize(KB):\t\t\tLast Modified:");
+		System.out.println(titlePath + "\tSize (kb):\t\t\tLast Modified:");
 		for(MyFile file : files){
 			String path = file.getPath();
 			String fixed = path + new String(new char[width - path.length()]).replace('\0', fill);
-			System.out.println(fixed+ "\t" + file.getTotalSpace()%1000 + "\t\t\t" + sdf.format(file.getTimeStamp()));
+			System.out.println(fixed+ "\t" + file.getTotalSpace() + "\t\t\t" + sdf.format(file.getTimeStamp()));
 		}
 	}
 
