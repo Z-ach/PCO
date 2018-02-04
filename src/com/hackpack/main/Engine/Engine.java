@@ -43,7 +43,6 @@ public class Engine {
 	public void showFiles(File[] files) {
 		if (files != null) {
 			for (File file : files) {
-				// System.out.println(file.getAbsolutePath());
 				if (file.isDirectory() && !file.isHidden() && notApp(file) && notUnwanted(file)) {
 					showFiles(file.listFiles());
 				} else {
