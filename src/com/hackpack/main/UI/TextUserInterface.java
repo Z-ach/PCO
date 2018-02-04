@@ -8,16 +8,30 @@ import java.util.Scanner;
 
 import com.hackpack.main.Engine.Engine.MyFile;
 
-public class TextUserInterface implements UI{
-	
+public class TextUserInterface implements UI {
+
 	Scanner input;
 	SimpleDateFormat sdf;
-	
-	public TextUserInterface(){
+
+	public TextUserInterface() {
 		input = new Scanner(System.in);
 		sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	}
-	
+
+	public String[] requestExt() {
+		ArrayList<String> ext = new ArrayList<>();
+		System.out.println("Do you have specific extensions you want?");
+		System.out.println("Yes/No");
+		String opt = input.nextLine();
+		while (opt.equalsIgnoreCase("Yes")) {
+			System.out.println("Please enter all the file extends you want to filter in the format: .extension");
+			ext.add(input.nextLine());
+			System.out.println("Would you like to add more?");
+			opt = input.nextLine();
+		}
+		return (String[])ext.toArray();
+	}
+
 	@Override
 	public long requestDate() {
 		System.out.println("Please enter a date in the format: MM/DD/YYYY");
@@ -43,10 +57,10 @@ public class TextUserInterface implements UI{
 		String title = "Path:";
 		String titlePath = title + new String(new char[width - title.length()]).replace('\0', fill);
 		System.out.println(titlePath + "\tSize (kb):\t\t\tLast Modified:");
-		for(MyFile file : files){
+		for (MyFile file : files) {
 			String path = file.getPath();
 			String fixed = path + new String(new char[width - path.length()]).replace('\0', fill);
-			System.out.println(fixed+ "\t" + file.getTotalSpace() + "\t\t\t" + sdf.format(file.getTimeStamp()));
+			System.out.println(fixed + "\t" + file.getTotalSpace() + "\t\t\t" + sdf.format(file.getTimeStamp()));
 		}
 	}
 
