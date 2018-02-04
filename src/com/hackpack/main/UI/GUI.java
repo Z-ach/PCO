@@ -57,7 +57,7 @@ public class GUI extends JFrame implements ActionListener, UI{
 	}
 
 	@Override
-	public void printList(ArrayList<MyFile> files) {
+	public void printList(ArrayList<MyFile> files, int length) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -12,6 +12,7 @@ public class Engine {
 	private ArrayList<MyFile> aList;
 	UI ui;
 	long date;
+	int maxLength;
 
 	public Engine(UI ui) {
 		aList = new ArrayList<MyFile>();
@@ -23,7 +24,7 @@ public class Engine {
 		date = ui.requestDate();
 		showFiles(files);
 		Collections.sort(aList);
-		ui.printList(aList);
+		ui.printList(aList, maxLength);
 	}
 
 	public void showFiles(File[] files) {
@@ -32,9 +33,10 @@ public class Engine {
 				showFiles(file.listFiles());
 			} else {
 				if (fileFilter(file) && file.lastModified() < date) {
+					if(maxLength < file.getAbsolutePath().length()){
+						maxLength = file.getAbsolutePath().length();
+					}
 					aList.add(new MyFile(file));
-					if (aList.size() % 100000 == 0)
-						System.out.println(aList.size());
 				}
 			}
 		}

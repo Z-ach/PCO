@@ -37,10 +37,16 @@ public class TextUserInterface implements UI{
 	}
 
 	@Override
-	public void printList(ArrayList<MyFile> files) {
-		System.out.println("Path:\t\t\t\t\t\t\t\t\t\t\t\t\tSize:\t\t\tLast Modified:");
+	public void printList(ArrayList<MyFile> files, int length) {
+		int width = length + 5;
+		char fill = ' ';
+		String title = "Path:";
+		String titlePath = title + new String(new char[width - title.length()]).replace('\0', fill);
+		System.out.println(titlePath + "\tSize:\t\t\tLast Modified:");
 		for(MyFile file : files){
-			System.out.println(file.getPath() + "\t\t\t\t\t" + file.getTotalSpace() + "\t\t" + sdf.format(file.getTimeStamp()));
+			String path = file.getPath();
+			String fixed = path + new String(new char[width - path.length()]).replace('\0', fill);
+			System.out.println(fixed+ "\t" + file.getTotalSpace() + "\t\t\t" + sdf.format(file.getTimeStamp()));
 		}
 	}
 
