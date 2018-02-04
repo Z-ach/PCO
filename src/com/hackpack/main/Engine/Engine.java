@@ -12,6 +12,7 @@ public class Engine {
 	UI ui;
 	long date;
 	int maxLength;
+	String[] extensions;
 
 	public Engine(UI ui) {
 		aList = new ArrayList<MyFile>();
@@ -21,6 +22,7 @@ public class Engine {
 	public void run() {
 		File[] files = getRoot().listFiles();
 		date = ui.requestDate();
+		createFileFilter();
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList, maxLength);
@@ -59,9 +61,12 @@ public class Engine {
 	private boolean notApp(File file) {
 		return !file.getAbsolutePath().contains("\\.") && !file.getAbsolutePath().contains(".app");
 	}
+	
+	private void createFileFilter(){
+		extensions = ui.requestExt();
+	}
 
 	private boolean fileFilter(File file) {
-		String[] extensions = ui.requestExt();
 		for (String str : extensions) {
 			if (file.getAbsolutePath().contains(str)) {
 				return true;

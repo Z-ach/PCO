@@ -22,19 +22,31 @@ public class TextUserInterface implements UI {
 	public String[] requestExt() {
 		ArrayList<String> ext = new ArrayList<>();
 		System.out.println("Do you have specific extensions you want?");
-		System.out.println("Yes/No");
+		System.out.println("y/n");
 		String opt = input.nextLine();
-		while (opt.equalsIgnoreCase("Yes")) {
-			System.out.println("Please enter all the file extends you want to filter in the format: .extension");
-			ext.add(input.nextLine());
-			System.out.println("Would you like to add more?");
+		while(!opt.toLowerCase().equals("y") && !opt.toLowerCase().equals("n")){
+			System.out.println("Invalid entry. Please type y/n");
 			opt = input.nextLine();
 		}
-		if(ext.size() == 0){
+		switch(opt.toLowerCase()){
+		case "y":
+			System.out.println("Please enter all the file extends you want to filter in the format: .extension");
+			System.out.println("When you are finished, type done");
+			String extension = "";
+			while(!extension.equalsIgnoreCase("done")){
+				extension = input.nextLine();
+				ext.add(extension);
+			}
+			break;
+		case "n":
 			String[] extensions = { ".html", ".png", ".jpg", ".doc", ".docx", ".pdf", ".xls", ".xlsx", ".ppt", "pptx", ".txt"};
 			return extensions;
 		}
-		return (String[])ext.toArray();
+		String[] extensions = new String[ext.size()];
+		for(int i = 0; i < ext.size(); i++){
+			extensions[i] = ext.get(i);
+		}
+		return extensions;
 	}
 
 	@Override
