@@ -12,4 +12,5 @@ public interface UI {
 	public String deletePrompt(MyFile file);
 	public void running();
 	public String comfirmDelete();
+	public String starting();
 }
