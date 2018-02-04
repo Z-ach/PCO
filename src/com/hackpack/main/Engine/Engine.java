@@ -26,10 +26,12 @@ public class Engine {
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList, maxLength);
+		populateDeleteList();
 	}
 	
 	private File getRoot(){
 		File temp = new File(System.getProperty("user.home"));
+		System.out.println(temp.getAbsolutePath());
 		while(temp.getParent() != null)
 			temp = temp.getParentFile();
 		//return temp;
@@ -96,9 +98,8 @@ public class Engine {
 	}
 	
 	private void confirmAndDelete(ArrayList<MyFile> dList){
-		if(dList.size() == 0){
-			
-		}
+		if(dList.size() == 0)
+			return;
 		ui.printList(dList, maxLength);
 		for(MyFile file : dList){
 			file.delete();

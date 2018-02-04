@@ -86,7 +86,7 @@ public class TextUserInterface implements UI {
 		String answer = "";
 		System.out.println("Would you like to delete this file? Type y/n/done");
 		answer = input.nextLine();
-		while(!answer.equals("y") || !answer.equals("n") || !answer.equals("done")){
+		while(!answer.equals("y") && !answer.equals("n") && !answer.equals("done")){
 			System.out.println("Invalid entry. Please try again. Type y/n/done.");
 			answer = input.nextLine();
 		}
