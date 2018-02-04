@@ -91,20 +91,29 @@ public class Engine {
 				finished = true;
 			}
 		}
+		confirmAndDelete(deleteList);
 	}
 	
-	private void confirmAndDelete(){
-		
+	private void confirmAndDelete(ArrayList<MyFile> dList){
+		if(dList.size() == 0){
+			
+		}
+		ui.printList(dList, maxLength);
+		for(MyFile file : dList){
+			file.delete();
+		}
 	}
 
 	public class MyFile implements Comparable<MyFile> {
 		private String path;
 		private long timeStamp, fileSize;
-
+		private File file;
+		
 		private MyFile(File file) {
 			this.path = file.getAbsolutePath();
 			this.timeStamp = file.lastModified();
 			this.fileSize = file.length();
+			this.file = file;
 		}
 
 		public String getPath() {
@@ -117,6 +126,10 @@ public class Engine {
 
 		public long getTotalSpace() {
 			return fileSize/1024;
+		}
+		
+		private void delete(){
+			file.delete();
 		}
 
 		@Override
