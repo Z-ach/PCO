@@ -61,7 +61,7 @@ public class Engine {
 	}
 
 	private boolean fileFilter(File file) {
-		String[] extensions = { ".exe", ".html", ".png", ".jpg", ".doc", ".docx", ".pdf", ".xls", ".xlsx", ".ppt", "pptx", ".txt"};
+		String[] extensions = ui.requestExt();
 		for (String str : extensions) {
 			if (file.getAbsolutePath().contains(str)) {
 				return true;
