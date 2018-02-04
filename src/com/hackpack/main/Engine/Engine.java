@@ -1,6 +1,7 @@
 package com.hackpack.main.Engine;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -17,7 +18,8 @@ public class Engine {
 	}
 
 	public void run(){
-		File[] files = new File(System.getProperty("user.home")).listFiles();
+		//File[] files = new File(System.getProperty("user.home")).listFiles(new ImageFileFilter());
+		File[] files = new File("/Users/Zach/Desktop").listFiles(new ImageFileFilter());
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList);
@@ -29,6 +31,8 @@ public class Engine {
 				showFiles(file.listFiles());
 			} else {
 				aList.add(new MyFile(file));
+				if(aList.size() % 100000 == 0)
+					System.out.println(aList.size());
 			}
 		}
 	}
@@ -64,5 +68,22 @@ public class Engine {
 			}
 			return 0;
 		}
+	}
+	
+	public class ImageFileFilter implements FileFilter
+	{
+	  private final String[] okFileExtensions = new String[] {".pak"};
+
+	  public boolean accept(File file)
+	  {
+	    for (String extension : okFileExtensions)
+	    {
+	      if (!file.getName().toLowerCase().endsWith(extension))
+	      {
+	        return true;
+	      }
+	    }
+	    return false;
+	  }
 	}
 }
