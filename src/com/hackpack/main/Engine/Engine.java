@@ -70,6 +70,27 @@ public class Engine {
 		return false;
 	}
 	
+	private void populateDeleteList(){
+		ArrayList<MyFile> deleteList = new ArrayList<MyFile>();
+		boolean finished = false;
+		for(MyFile file : aList){
+			if(finished)
+				break;
+			switch(ui.deletePrompt()){
+			case "y":
+				deleteList.add(file);
+				break;
+			case "n":
+				break;
+			case "done":
+				finished = true;
+			}
+		}
+	}
+	
+	private void confirmAndDelete(){
+		
+	}
 
 	public class MyFile implements Comparable<MyFile> {
 		private String path;
