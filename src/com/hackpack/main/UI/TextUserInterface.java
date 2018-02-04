@@ -98,7 +98,18 @@ public class TextUserInterface implements UI {
 	public void running() {
 		System.out.println("Program is now running. Please wait as it indexes your files.");
 	}
-
+	
+	@Override
+	public String starting(){
+		System.out.println("Would you like to index your entire computer or only your home directory?");
+		System.out.println("Enter root or home");
+		String choice = input.nextLine();
+		while(!choice.toLowerCase().equals("root") && !choice.toLowerCase().equals("home")){
+			System.out.println("Invalid response. Please try again.");
+			choice = input.nextLine();
+		}
+		return choice;
+	}
 	@Override
 	public String comfirmDelete() {
 		String response = "";
