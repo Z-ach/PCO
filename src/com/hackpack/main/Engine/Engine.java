@@ -19,10 +19,7 @@ public class Engine {
 	}
 
 	public void run() {
-		File[] files = new File(System.getenv("USERPROFILE")).listFiles();
-		File f = new File(System.getenv("USERPROFILE"));
-		System.out.println(files[0].getAbsolutePath());
-		System.out.println(files[0].listFiles().length);
+		File[] files = new File(System.getProperty("user.home")).listFiles();
 		date = ui.requestDate();
 		showFiles(files);
 		Collections.sort(aList);
