@@ -23,6 +23,7 @@ public class Engine {
 		File[] files = getRoot().listFiles();
 		date = ui.requestDate();
 		createFileFilter();
+		ui.running();
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList, maxLength);
@@ -34,8 +35,7 @@ public class Engine {
 		System.out.println(temp.getAbsolutePath());
 		while (temp.getParent() != null)
 			temp = temp.getParentFile();
-		// return temp;
-		return new File("/Users/Zach/Desktop/HackPoly/HackPoly/testText");
+		return temp;
 	}
 
 	public void showFiles(File[] files) {
