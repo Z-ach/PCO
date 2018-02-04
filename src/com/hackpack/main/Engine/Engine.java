@@ -11,35 +11,50 @@ public class Engine {
 
 	private ArrayList<MyFile> aList;
 	UI ui;
-	
+	long date;
+
 	public Engine(UI ui) {
 		aList = new ArrayList<MyFile>();
 		this.ui = ui;
 	}
 
-	public void run(){
-		//File[] files = new File(System.getProperty("user.home")).listFiles(new ImageFileFilter());
-		File[] files = new File("/Users/Zach/Desktop").listFiles(new ImageFileFilter());
+	public void run() {
+		File[] files = new File(System.getProperty("user.home")).listFiles();
+		date = ui.requestDate();
 		showFiles(files);
 		Collections.sort(aList);
 		ui.printList(aList);
 	}
-	
+
 	public void showFiles(File[] files) {
 		for (File file : files) {
-			if (file.isDirectory()) {
+			if (file.isDirectory() && !file.isHidden() && notApp(file)) {
 				showFiles(file.listFiles());
 			} else {
-				aList.add(new MyFile(file));
-				if(aList.size() % 100000 == 0)
-					System.out.println(aList.size());
+				if (fileFilter(file) && file.lastModified() < date) {
+					aList.add(new MyFile(file));
+					if (aList.size() % 100000 == 0)
+						System.out.println(aList.size());
+				}
 			}
 		}
 	}
 	
+	private boolean notApp(File file){
+		return !file.getAbsolutePath().contains(".app");
+	}
 
+	private boolean fileFilter(File file) {
+		String[] extensions = { ".html", ".png", ".jpg" };
+		for (String str : extensions) {
+			if (file.getAbsolutePath().contains(str)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-	public class MyFile implements Comparable<MyFile>{
+	public class MyFile implements Comparable<MyFile> {
 		private String path;
 		private long timeStamp, fileSize;
 
@@ -48,42 +63,27 @@ public class Engine {
 			this.timeStamp = file.lastModified();
 			this.fileSize = file.length();
 		}
-		
-		public String getPath(){
+
+		public String getPath() {
 			return path;
 		}
-		public long getTimeStamp(){
+
+		public long getTimeStamp() {
 			return timeStamp;
 		}
-		public long getTotalSpace(){
+
+		public long getTotalSpace() {
 			return fileSize;
 		}
 
 		@Override
 		public int compareTo(MyFile file) {
-			if(this.getTimeStamp() < file.getTimeStamp()){
+			if (this.getTimeStamp() < file.getTimeStamp()) {
 				return -1;
-			}else if(this.getTimeStamp() > file.getTimeStamp()){
+			} else if (this.getTimeStamp() > file.getTimeStamp()) {
 				return 1;
 			}
 			return 0;
 		}
-	}
-	
-	public class ImageFileFilter implements FileFilter
-	{
-	  private final String[] okFileExtensions = new String[] {".pak"};
-
-	  public boolean accept(File file)
-	  {
-	    for (String extension : okFileExtensions)
-	    {
-	      if (!file.getName().toLowerCase().endsWith(extension))
-	      {
-	        return true;
-	      }
-	    }
-	    return false;
-	  }
 	}
 }
