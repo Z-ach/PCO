@@ -10,4 +10,6 @@ public interface UI {
 	public void printList(ArrayList<MyFile> files, int length);
 	public String[] requestExt();
 	public String deletePrompt();
+	public void running();
+	public void printFile(MyFile file);
 }

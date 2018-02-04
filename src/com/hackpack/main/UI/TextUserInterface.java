@@ -93,4 +93,14 @@ public class TextUserInterface implements UI {
 		return answer;
 	}
 
+	@Override
+	public void running() {
+		System.out.println("Program is now running. Please wait as it indexes your files.");
+	}
+
+	@Override
+	public void printFile(MyFile file) {
+		System.out.println(file.getPath());
+	}
+
 }

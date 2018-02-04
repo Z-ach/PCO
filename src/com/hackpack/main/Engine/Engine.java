@@ -32,7 +32,8 @@ public class Engine {
 		File temp = new File(System.getProperty("user.home"));
 		while(temp.getParent() != null)
 			temp = temp.getParentFile();
-		return temp;
+		//return temp;
+		return new File("/Users/Zach/Desktop/HackPoly/HackPoly/testText");
 	}
 
 	public void showFiles(File[] files) {
